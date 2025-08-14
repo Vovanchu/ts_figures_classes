@@ -16,6 +16,10 @@ export class Triangle implements Figure {
   private c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
+    if (color !== 'red' && color !== 'green' && color !== 'blue') {
+      throw new Error('Color must be red, green or blue');
+    }
+
     if (a <= 0) {
       throw new Error('Side a must be greater than 0');
     }
@@ -61,6 +65,10 @@ export class Circle implements Figure {
   private radius: number;
 
   constructor(color: string, radius: number) {
+    if (color !== 'red' && color !== 'green' && color !== 'blue') {
+      throw new Error('Color must be red, green or blue');
+    }
+
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -87,6 +95,10 @@ export class Rectangle implements Figure {
   private height: number;
 
   constructor(color: string, width: number, height: number) {
+    if (color !== 'red' && color !== 'green' && color !== 'blue') {
+      throw new Error('Color must be red, green or blue');
+    }
+
     if (height <= 0 || width <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
@@ -105,7 +117,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const area = Math.floor(figure.getArea() * 100) / 100;
+  const area = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
