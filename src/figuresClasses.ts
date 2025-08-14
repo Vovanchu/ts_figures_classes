@@ -17,19 +17,27 @@ export class Triangle implements Figure {
 
   constructor(color: string, a: number, b: number, c: number) {
     if (color !== 'red' && color !== 'green' && color !== 'blue') {
-      throw new Error('Color must be red, green or blue');
+      throw new Error(
+        `Invalid color: ${color}. Color must be red, green, or blue`,
+      );
     }
 
     if (a <= 0) {
-      throw new Error('Side a must be greater than 0');
+      throw new Error(
+        `Triangle side a must be a positive number, but got: ${a}`,
+      );
     }
 
     if (b <= 0) {
-      throw new Error('Side b must be greater than 0');
+      throw new Error(
+        `Triangle side b must be a positive number, but got: ${b}`,
+      );
     }
 
     if (c <= 0) {
-      throw new Error('Side c must be greater than 0');
+      throw new Error(
+        `Triangle side c must be a positive number, but got: ${c}`,
+      );
     }
 
     const sides = [a, b, c].sort((x, y) => y - x);
@@ -37,7 +45,7 @@ export class Triangle implements Figure {
 
     if (longest >= side2 + side3) {
       throw new Error(
-        'The longest side must be less than the sum of the other two sides.',
+        `The longest side (${longest}) must be less than the sum of the other two sides (${side2} + ${side3} = ${side2 + side3}).`,
       );
     }
 
@@ -66,11 +74,15 @@ export class Circle implements Figure {
 
   constructor(color: string, radius: number) {
     if (color !== 'red' && color !== 'green' && color !== 'blue') {
-      throw new Error('Color must be red, green or blue');
+      throw new Error(
+        `Invalid color: ${color}. Color must be red, green, or blue`,
+      );
     }
 
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+      throw new Error(
+        `Circle radius must be a positive number, but got: ${radius}`,
+      );
     }
 
     this.shape = 'circle';
@@ -96,11 +108,17 @@ export class Rectangle implements Figure {
 
   constructor(color: string, width: number, height: number) {
     if (color !== 'red' && color !== 'green' && color !== 'blue') {
-      throw new Error('Color must be red, green or blue');
+      throw new Error(
+        `Invalid color: ${color}. Color must be red, green, or blue`,
+      );
     }
 
-    if (height <= 0 || width <= 0) {
-      throw new Error('Width and height must be greater than 0');
+    if (height <= 0) {
+      throw new Error('Height must be greater than 0');
+    }
+
+    if (width <= 0) {
+      throw new Error('Width must be greater than 0');
     }
 
     this.shape = 'rectangle';
