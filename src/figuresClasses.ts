@@ -16,12 +16,25 @@ export class Triangle implements Figure {
   private c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be positive numbers');
+    if (a <= 0) {
+      throw new Error('Side a must be greater than 0');
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle sides');
+    if (b <= 0) {
+      throw new Error('Side b must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Side c must be greater than 0');
+    }
+
+    const sides = [a, b, c].sort((x, y) => y - x);
+    const [longest, side2, side3] = sides;
+
+    if (longest >= side2 + side3) {
+      throw new Error(
+        'The longest side must be less than the sum of the other two sides.',
+      );
     }
 
     this.shape = 'triangle';
@@ -69,19 +82,19 @@ export class Rectangle implements Figure {
 
   public color: string;
 
-  private height: number;
-
   private width: number;
 
-  constructor(color: string, height: number, width: number) {
+  private height: number;
+
+  constructor(color: string, width: number, height: number) {
     if (height <= 0 || width <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
 
     this.shape = 'rectangle';
     this.color = color;
-    this.height = height;
     this.width = width;
+    this.height = height;
   }
 
   public getArea(): number {
@@ -92,7 +105,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const area = Math.round(figure.getArea() * 100) / 100;
+  const area = Math.floor(figure.getArea() * 100) / 100;
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
